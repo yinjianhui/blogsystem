@@ -38,7 +38,7 @@ public class UserRepositoryImpl implements UserRepository{
 	public User saveOrupdate(User user) {
 		
 		Long id = user.getId();
-		if ( id == null) {
+		if ( id <= 0) {
 			id = count.incrementAndGet();
 			user.setId(id);
 		}

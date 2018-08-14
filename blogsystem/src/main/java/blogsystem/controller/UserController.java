@@ -63,7 +63,7 @@ public class UserController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("{form}")
+	@GetMapping("/form")
 	public ModelAndView createForm(Model model){
 		
  		model.addAttribute("user", new User());
@@ -86,5 +86,17 @@ public class UserController {
 		return new ModelAndView("redirect:/users");
 	}
 	
+	/**
+	 * 删除用户
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/delete/{id}")
+	public ModelAndView delete(@PathVariable("id") Long id, Model model){
+		
+		userRepository.deleteUser(id);
+		
+		return new ModelAndView("redirect:/users");
+	}
 	
 }
