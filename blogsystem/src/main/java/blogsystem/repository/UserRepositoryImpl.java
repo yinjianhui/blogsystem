@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 
 import blogsystem.domain.User;
 
-@Service
-public class UserRepositoryImpl implements UserRepository{
+//@Service
+public class UserRepositoryImpl /*implements UserRepository*/{
 	
 	private static AtomicLong count = new AtomicLong();
 	private final ConcurrentHashMap<Long, User> userMap = new ConcurrentHashMap<Long, User>();
 	
 	
-	@Override
+	/*@Override
 	public void deleteUser(long id) {
 		this.userMap.remove(id);
 	}
@@ -46,6 +46,6 @@ public class UserRepositoryImpl implements UserRepository{
 		this.userMap.put(id, user);
 		
 		return user;
-	}
+	}*/
 	
 }

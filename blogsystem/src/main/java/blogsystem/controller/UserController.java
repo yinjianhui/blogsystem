@@ -36,7 +36,7 @@ public class UserController {
 	@GetMapping
 	public ModelAndView list(Model model){
 		
-		model.addAttribute("userList", userRepository.listUsers());
+		model.addAttribute("userList", userRepository.findAll());
 		model.addAttribute("title", "用户管理");
 		
 		return new ModelAndView("users/list", "userModel", model);
@@ -50,7 +50,7 @@ public class UserController {
 	@GetMapping("{id}")
 	public ModelAndView view(@PathVariable("id") Long id, Model model){
 		
-		User user = userRepository.getUserByid(id);
+		User user = userRepository.findOne(id);
  
  		model.addAttribute("user", user);
  		model.addAttribute("title", "查看用户");
@@ -81,7 +81,7 @@ public class UserController {
 	@PostMapping
 	public ModelAndView saveOrUpdateUSer(User user, Model model){
 		
-		user = userRepository.saveOrupdate(user);
+		user = userRepository.save(user);
 		
 		return new ModelAndView("redirect:/users");
 	}
@@ -94,7 +94,7 @@ public class UserController {
 	@GetMapping("/delete/{id}")
 	public ModelAndView delete(@PathVariable("id") Long id, Model model){
 		
-		userRepository.deleteUser(id);
+		userRepository.delete(id);
 		
 		return new ModelAndView("redirect:/users");
 	}

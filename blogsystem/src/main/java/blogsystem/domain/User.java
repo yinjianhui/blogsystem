@@ -1,11 +1,24 @@
 package blogsystem.domain;
 
+
+
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+
 /**
  *   @作者: huisir
  *   @日期: 2018年8月12日  * @描述:
  */
+@Entity
 public class User {
-
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;//唯一id
 
 	private String name;
