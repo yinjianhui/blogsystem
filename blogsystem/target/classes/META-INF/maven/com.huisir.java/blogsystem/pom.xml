@@ -44,18 +44,30 @@
 			<version>6.0.5</version>
 	</dependency>
 	
-	 <!-- h2 数据源依赖 -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+	<!-- Spring Boot Elasticsearch 依赖 -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+    </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
+	<dependency>
+	    <groupId>net.java.dev.jna</groupId>
+	    <artifactId>jna</artifactId>
+	    <version>4.3.0</version>
+	</dependency>
+    
     
 	
 	
 	
 	
-	
+	 <!-- 测试依赖 -->
+     <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-test</artifactId>
+         <scope>test</scope>
+     </dependency>
 	
 	 <!-- 热部署模块 -->
      <dependency>
