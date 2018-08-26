@@ -1,5 +1,8 @@
 package blogsystem.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import blogsystem.domain.Authority;
 import blogsystem.domain.User;
 import blogsystem.repository.UserRepository;
+import blogsystem.service.AuthorityService;
+import blogsystem.service.UserService;
+import sun.print.resources.serviceui;
 
 /**
  * 
@@ -27,6 +34,14 @@ public class UserController {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	UserService userService;
+	
+	
+	@Autowired
+	private AuthorityService authorityService;
+	
 	
 	/**
 	 * 查询所有用户
@@ -66,7 +81,7 @@ public class UserController {
 	@GetMapping("/form")
 	public ModelAndView createForm(Model model){
 		
- 		model.addAttribute("user", new User());
+ 		model.addAttribute("user", new User(null, null, null, null));
  		model.addAttribute("title", "创建用户");
 		
 		return new ModelAndView("users/form", "userModel", model);
@@ -79,7 +94,10 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping
-	public ModelAndView saveOrUpdateUSer(User user, Model model){
+	public ModelAndView saveOrUpdateUSer(User user, Long authorityId){
+		List<Authority> authorities = new ArrayList<>();
+		authorities.add(authorityService.getAuthorityById(authorityId));
+		user.setAuthorities(authorities);
 		
 		user = userRepository.save(user);
 		
@@ -97,6 +115,20 @@ public class UserController {
 		userRepository.delete(id);
 		
 		return new ModelAndView("redirect:/users");
+	}
+	
+	/**
+	 * 注册用户
+	 */
+	@PostMapping("/register")
+	public String registerUser(User user){
+		List<Authority> authorities = new ArrayList<>();
+		authorities.add(authorityService.getAuthorityById(1L));
+		user.setAuthorities(authorities);
+		
+		userService.registerUser(user);
+		return "redirect:/login";
+		
 	}
 	
 }
